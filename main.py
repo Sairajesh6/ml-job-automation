@@ -1,6 +1,6 @@
 from jobs.scrape_jobs import fetch_remotive_jobs
 from cover_letters.generate_letters import generate_cover_letter
-from email.send_email import send_email
+from mailer.send_email import send_email
 from utils.config import USER_SKILLS
 from utils.match_score import compute_match_score
 from resume.update_resume import update_resume
@@ -21,6 +21,6 @@ if __name__ == "__main__":
     send_email(
         subject="🚀 Daily AI/ML Job Picks",
         body=body,
-        to="knowledgetaker6@gmail.com",
+        to="sairajeshvelagana6@gmail.com",
         attachments=attachments
     )
