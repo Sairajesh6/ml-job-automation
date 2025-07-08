@@ -1,0 +1,6 @@
+Dear Hiring Manager at {{ company }},
+
+I am writing to express my interest in the {{ role }} position at your esteemed organization. With practical experience in ML, transformers, and AI projects, I am confident in contributing to your team.
+
+Sincerely,  
+Sai Rajesh Velagana
