@@ -1,0 +1,40 @@
+name: Daily AI/ML Job Batch
+
+on:
+  schedule:
+    - cron: '0 5 * * *'  # 11:00 AM IST
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Install TeX Live (for LaTeX resume)
+      run: sudo apt-get update && sudo apt-get install -y texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+
+    - name: Compile LaTeX Resume to PDF
+      run: |
+        cd templates
+        pdflatex resume_template.tex
+        mv resume_template.pdf ../resume/resume.pdf
+
+    - name: Run Job Automation
+      run: python main.py
+      env:
+        EMAIL_USER: ${{ secrets.EMAIL_USER }}
+        EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        OVERLEAF_PROJECT_ID: ${{ secrets.OVERLEAF_PROJECT_ID }}
+        OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
